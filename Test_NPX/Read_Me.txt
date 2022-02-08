@@ -1,1 +1,1 @@
-The developed codes of each peripheral are inside of "Project" folder. Other folder are created automatically by MCUXpresso IDE.
+The developed codes of each peripheral are inside of "Project" folder. The other folders are created automatically by MCUXpresso IDE
