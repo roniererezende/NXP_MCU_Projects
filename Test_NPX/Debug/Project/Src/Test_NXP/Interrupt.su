@@ -1,0 +1,3 @@
+E:\Users\Roniere Resende\Documents\Meus Documentos\Estudo de Tecnologias\NXP Microcontrollers\Projects\Test_NPX\drivers/fsl_lptmr.h:258:24:LPTMR_GetStatusFlags	16	static
+E:\Users\Roniere Resende\Documents\Meus Documentos\Estudo de Tecnologias\NXP Microcontrollers\Projects\Test_NPX\drivers/fsl_lptmr.h:270:20:LPTMR_ClearStatusFlags	16	static
+../Project/Src/Test_NXP/Interrupt.c:5:6:LPTMR0_IRQHandler	16	static
