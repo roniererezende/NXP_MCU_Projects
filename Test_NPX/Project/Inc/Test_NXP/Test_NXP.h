@@ -8,9 +8,11 @@
 #include "clock_config.h"
 #include "MKL27Z644.h"
 #include "fsl_debug_console.h"
+#include "fsl_adc16.h"
 
 #include "Interrupt.h"
 #include "ADC.h"
+#include "PWM.h"
 
 //#include "../../Inc/Test_NXP/Interrupt.h"
 
@@ -25,6 +27,7 @@ typedef struct s_Test_NXP
 	e_Test_NXP_State State;
 
 	s_ADC ADC;
+	s_PWM PWM;
 
 	int16_t Timer_Counter;
 	bool Timer_Interrupt_Flag;
@@ -34,5 +37,6 @@ typedef struct s_Test_NXP
 extern s_Test_NXP Test_NXP;
 
 void Test_NXP_Main(void);
+void Test_NXP_Init(void);
 
 #endif

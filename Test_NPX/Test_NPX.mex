@@ -48,7 +48,7 @@
                <pin_label pin_num="43" pin_signal="ADC0_SE14/PTC0/EXTRG_IN/USB_SOF_OUT/CMP0_OUT" label="J4[4]/A1-ADC0_SE14" identifier="USB_SOF_OUT"/>
                <pin_label pin_num="9" pin_signal="ADC0_DP0/ADC0_SE0/PTE20/TPM1_CH0/LPUART0_TX/FXIO0_D4" label="J4[6]/A2-ADC0_SE0" identifier="ADC0_SE0"/>
                <pin_label pin_num="10" pin_signal="ADC0_DM0/ADC0_SE4a/PTE21/TPM1_CH1/LPUART0_RX/FXIO0_D5" label="J4[8]/A3-ADC0_SE4A"/>
-               <pin_label pin_num="36" pin_signal="ADC0_SE9/PTB1/I2C0_SDA/TPM1_CH1/SPI1_MISO/SPI1_MOSI" label="J4[10]/A4-I2C0_SDA/ADC0_SE9" identifier="I2C0_SDA"/>
+               <pin_label pin_num="36" pin_signal="ADC0_SE9/PTB1/I2C0_SDA/TPM1_CH1/SPI1_MISO/SPI1_MOSI" label="PWM_LED" identifier="I2C0_SDA;PWM_LED"/>
                <pin_label pin_num="35" pin_signal="ADC0_SE8/PTB0/LLWU_P5/I2C0_SCL/TPM1_CH0/SPI1_MOSI/SPI1_MISO" label="ADC_TRIM" identifier="I2C0_SCL;ADC_TRIM"/>
                <pin_label pin_num="41" pin_signal="PTB18/TPM2_CH0" label="J2[11]/D11[1]/LED_RED" identifier="LED_RED"/>
                <pin_label pin_num="25" pin_signal="PTA3/I2C1_SCL/TPM0_CH0/SWD_DIO" label="J11[2]/SWD_DIO"/>
@@ -107,6 +107,11 @@
                         <data>true</data>
                      </feature>
                   </dependency>
+                  <dependency resourceType="Peripheral" resourceId="TPM1" description="Peripheral TPM1 is not initialized" problem_level="1" source="Pins:BOARD_InitPins">
+                     <feature name="initialized" evaluation="equal">
+                        <data>true</data>
+                     </feature>
+                  </dependency>
                   <dependency resourceType="SWComponent" resourceId="platform.drivers.common" description="Pins initialization requires the COMMON Driver in the project." problem_level="2" source="Pins:BOARD_InitPins">
                      <feature name="enabled" evaluation="equal" configuration="core0">
                         <data>true</data>
@@ -158,6 +163,11 @@
                   <pin peripheral="ADC0" signal="SE, 8" pin_num="35" pin_signal="ADC0_SE8/PTB0/LLWU_P5/I2C0_SCL/TPM1_CH0/SPI1_MOSI/SPI1_MISO">
                      <pin_features>
                         <pin_feature name="identifier" value="ADC_TRIM"/>
+                     </pin_features>
+                  </pin>
+                  <pin peripheral="TPM1" signal="CH, 1" pin_num="36" pin_signal="ADC0_SE9/PTB1/I2C0_SDA/TPM1_CH1/SPI1_MISO/SPI1_MOSI">
+                     <pin_features>
+                        <pin_feature name="identifier" value="PWM_LED"/>
                      </pin_features>
                   </pin>
                </pins>
@@ -755,6 +765,26 @@
                   <data type="Version">2.1.1</data>
                </feature>
             </dependency>
+            <dependency resourceType="SWComponent" resourceId="platform.drivers.adc16" description="ADC16 Driver not found in the toolchain/IDE project. Project will not compile!" problem_level="2" source="Peripherals">
+               <feature name="enabled" evaluation="equal">
+                  <data type="Boolean">true</data>
+               </feature>
+            </dependency>
+            <dependency resourceType="SWComponent" resourceId="platform.drivers.adc16" description="Unsupported version of the ADC16 Driver in the toolchain/IDE project. Required: ${required_value}, actual: ${actual_value}. Project might not compile correctly." problem_level="1" source="Peripherals">
+               <feature name="version" evaluation="equivalent">
+                  <data type="Version">2.2.0</data>
+               </feature>
+            </dependency>
+            <dependency resourceType="SWComponent" resourceId="platform.drivers.tpm" description="TPM Driver not found in the toolchain/IDE project. Project will not compile!" problem_level="2" source="Peripherals">
+               <feature name="enabled" evaluation="equal">
+                  <data type="Boolean">true</data>
+               </feature>
+            </dependency>
+            <dependency resourceType="SWComponent" resourceId="platform.drivers.tpm" description="Unsupported version of the TPM Driver in the toolchain/IDE project. Required: ${required_value}, actual: ${actual_value}. Project might not compile correctly." problem_level="1" source="Peripherals">
+               <feature name="version" evaluation="equivalent">
+                  <data type="Version">2.0.2</data>
+               </feature>
+            </dependency>
          </dependencies>
          <generated_project_files>
             <file path="board/peripherals.c" update_enabled="true"/>
@@ -783,19 +813,35 @@
                         <data type="Frequency" unit="Hz">0</data>
                      </feature>
                   </dependency>
+                  <dependency resourceType="PeripheralUnifiedSignal" resourceId="ADC0.adc_se.8" description="Signal SE of the channel 8 of the peripheral ADC0 is not routed." problem_level="1" source="Peripherals:BOARD_InitPeripherals">
+                     <feature name="routed" evaluation="">
+                        <data type="Boolean">true</data>
+                     </feature>
+                  </dependency>
+                  <dependency resourceType="ClockOutput" resourceId="TPMCLK" description="TPM clock is inactive." problem_level="2" source="Peripherals:BOARD_InitPeripherals">
+                     <feature name="frequency" evaluation="greaterThan">
+                        <data type="Frequency" unit="Hz">0</data>
+                     </feature>
+                  </dependency>
+                  <dependency resourceType="PeripheralUnifiedSignal" resourceId="TPM1.tmr_ch.1" description="Signal CH1 of peripheral TPM1 is not routed" problem_level="1" source="Peripherals:BOARD_InitPeripherals">
+                     <feature name="routed" evaluation="equal">
+                        <data type="Boolean">true</data>
+                     </feature>
+                  </dependency>
                </dependencies>
                <instances>
                   <instance name="NVIC" uuid="534e5e70-c204-4a42-a889-65ec93f1bb72" type="nvic" type_id="nvic_57b5eef3774cc60acaede6f5b8bddc67" mode="general" peripheral="NVIC" enabled="true" comment="" custom_name_enabled="false" editing_lock="false">
                      <config_set name="nvic">
                         <array name="interrupt_table">
                            <struct name="0"/>
+                           <struct name="1"/>
                         </array>
                         <array name="interrupts"/>
                      </config_set>
                   </instance>
                   <instance name="GPIOD" uuid="7e7363af-fc26-45c7-ac65-ff5c5da7a375" type="gpio" type_id="gpio_5920c5e026e8e974e6dc54fbd5e22ad7" mode="GPIO" peripheral="GPIOD" enabled="true" comment="" custom_name_enabled="false" editing_lock="false">
-                     <config_set name="fsl_gpio" quick_selection="QS_GPIO_1">
-                        <setting name="enable_irq" value="false"/>
+                     <config_set name="fsl_gpio">
+                        <setting name="enable_irq" value="true"/>
                         <struct name="port_interrupt">
                            <setting name="IRQn" value="PORTB_PORTC_PORTD_PORTE_IRQn"/>
                            <setting name="enable_interrrupt" value="enabled"/>
@@ -827,6 +873,90 @@
                            <setting name="enable_custom_name" value="true"/>
                            <setting name="handler_custom_name" value="Timer_Interrupt"/>
                         </struct>
+                     </config_set>
+                  </instance>
+                  <instance name="ADC" uuid="6e33b830-8e5e-4853-944d-0efd56cc0389" type="adc16" type_id="adc16_897558f9b7366ed198de18c33097d7d2" mode="ADC" peripheral="ADC0" enabled="true" comment="" custom_name_enabled="true" editing_lock="false">
+                     <config_set name="fsl_adc16">
+                        <struct name="adc16_config">
+                           <setting name="referenceVoltageSource" value="kADC16_ReferenceVoltageSourceVref"/>
+                           <setting name="clockSource" value="kADC16_ClockSourceAsynchronousClock"/>
+                           <setting name="enableAsynchronousClock" value="true"/>
+                           <setting name="clockDivider" value="kADC16_ClockDivider8"/>
+                           <setting name="resolution" value="kADC16_ResolutionSE12Bit"/>
+                           <setting name="longSampleMode" value="kADC16_LongSampleDisabled"/>
+                           <setting name="hardwareAverageMode" value="kADC16_HardwareAverageDisabled"/>
+                           <setting name="enableHighSpeed" value="false"/>
+                           <setting name="enableLowPower" value="false"/>
+                           <setting name="enableContinuousConversion" value="false"/>
+                        </struct>
+                        <setting name="adc16_channel_mux_mode" value="kADC16_ChannelMuxA"/>
+                        <struct name="adc16_hardware_compare_config">
+                           <setting name="hardwareCompareModeEnable" value="false"/>
+                        </struct>
+                        <setting name="doAutoCalibration" value="false"/>
+                        <setting name="offset" value="0"/>
+                        <setting name="trigger" value="false"/>
+                        <setting name="enable_dma" value="false"/>
+                        <setting name="enable_irq" value="false"/>
+                        <struct name="adc_interrupt">
+                           <setting name="IRQn" value="ADC0_IRQn"/>
+                           <setting name="enable_interrrupt" value="enabled"/>
+                           <setting name="enable_priority" value="false"/>
+                           <setting name="priority" value="0"/>
+                           <setting name="enable_custom_name" value="false"/>
+                        </struct>
+                        <array name="adc16_channels_config">
+                           <struct name="0">
+                              <setting name="channelName" value="ADC_TRIM"/>
+                              <setting name="enableDifferentialConversion" value="false"/>
+                              <setting name="channelNumber" value="SE.8"/>
+                              <setting name="enableInterruptOnConversionCompleted" value="false"/>
+                              <setting name="channelGroup" value="0"/>
+                              <setting name="initializeChannel" value="true"/>
+                           </struct>
+                        </array>
+                     </config_set>
+                  </instance>
+                  <instance name="TPM1" uuid="155614f6-ddca-48aa-b97b-85fa5089c5c1" type="tpm" type_id="tpm_e7472ea12d53461b8d293488f3ed72ec" mode="CenterAligned" peripheral="TPM1" enabled="true" comment="" custom_name_enabled="false" editing_lock="false">
+                     <config_set name="tpm_center_aligned_mode">
+                        <array name="tpm_center_aligned_channels_config">
+                           <struct name="0">
+                              <setting name="channelId" value="PWM_LED"/>
+                              <setting name="chnlNumber" value="kTPM_Chnl_1"/>
+                              <setting name="level" value="kTPM_HighTrue"/>
+                              <setting name="dutyCyclePercent" value="50"/>
+                              <setting name="enable_chan_irq" value="false"/>
+                           </struct>
+                        </array>
+                     </config_set>
+                     <config_set name="tpm_main_config">
+                        <struct name="tpm_config">
+                           <setting name="clockSource" value="kTPM_SystemClock"/>
+                           <setting name="tpmSrcClkFreq" value="BOARD_BootClockRUN"/>
+                           <setting name="prescale" value="kTPM_Prescale_Divide_1"/>
+                           <setting name="timerFrequency" value="4000"/>
+                           <setting name="useGlobalTimeBase" value="false"/>
+                           <setting name="triggerSelect" value="kTPM_Trigger_Select_0"/>
+                           <setting name="triggerSource" value="kTPM_TriggerSource_Internal"/>
+                           <setting name="enableDoze" value="false"/>
+                           <setting name="enableDebugMode" value="false"/>
+                           <setting name="enableReloadOnTrigger" value="false"/>
+                           <setting name="enableStopOnOverflow" value="false"/>
+                           <setting name="enableStartOnTrigger" value="false"/>
+                           <setting name="enablePauseOnTrigger" value="false"/>
+                        </struct>
+                        <set name="timer_interrupts">
+                           <selected/>
+                        </set>
+                        <setting name="enable_irq" value="false"/>
+                        <struct name="tpm_interrupt">
+                           <setting name="IRQn" value="TPM0_IRQn"/>
+                           <setting name="enable_interrrupt" value="enabled"/>
+                           <setting name="enable_priority" value="false"/>
+                           <setting name="priority" value="0"/>
+                           <setting name="enable_custom_name" value="false"/>
+                        </struct>
+                        <setting name="EnableTimerInInit" value="true"/>
                      </config_set>
                   </instance>
                </instances>

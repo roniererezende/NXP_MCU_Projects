@@ -13,7 +13,10 @@ board/peripherals.o board/peripherals.d: ../board/peripherals.c \
  E:\Users\Roniere\ Resende\Documents\Meus\ Documentos\Estudo\ de\ Tecnologias\NXP\ Microcontrollers\Projects\Test_NPX\drivers/fsl_common.h \
  E:\Users\Roniere\ Resende\Documents\Meus\ Documentos\Estudo\ de\ Tecnologias\NXP\ Microcontrollers\Projects\Test_NPX\drivers/fsl_gpio.h \
  E:\Users\Roniere\ Resende\Documents\Meus\ Documentos\Estudo\ de\ Tecnologias\NXP\ Microcontrollers\Projects\Test_NPX\drivers/fsl_port.h \
- E:\Users\Roniere\ Resende\Documents\Meus\ Documentos\Estudo\ de\ Tecnologias\NXP\ Microcontrollers\Projects\Test_NPX\drivers/fsl_lptmr.h
+ E:\Users\Roniere\ Resende\Documents\Meus\ Documentos\Estudo\ de\ Tecnologias\NXP\ Microcontrollers\Projects\Test_NPX\drivers/fsl_lptmr.h \
+ E:\Users\Roniere\ Resende\Documents\Meus\ Documentos\Estudo\ de\ Tecnologias\NXP\ Microcontrollers\Projects\Test_NPX\drivers/fsl_adc16.h \
+ E:\Users\Roniere\ Resende\Documents\Meus\ Documentos\Estudo\ de\ Tecnologias\NXP\ Microcontrollers\Projects\Test_NPX\drivers/fsl_clock.h \
+ E:\Users\Roniere\ Resende\Documents\Meus\ Documentos\Estudo\ de\ Tecnologias\NXP\ Microcontrollers\Projects\Test_NPX\drivers/fsl_tpm.h
 ../board/peripherals.h:
 E:\Users\Roniere\ Resende\Documents\Meus\ Documentos\Estudo\ de\ Tecnologias\NXP\ Microcontrollers\Projects\Test_NPX\drivers/fsl_common.h:
 E:\Users\Roniere\ Resende\Documents\Meus\ Documentos\Estudo\ de\ Tecnologias\NXP\ Microcontrollers\Projects\Test_NPX\device/fsl_device_registers.h:
@@ -29,3 +32,6 @@ E:\Users\Roniere\ Resende\Documents\Meus\ Documentos\Estudo\ de\ Tecnologias\NXP
 E:\Users\Roniere\ Resende\Documents\Meus\ Documentos\Estudo\ de\ Tecnologias\NXP\ Microcontrollers\Projects\Test_NPX\drivers/fsl_gpio.h:
 E:\Users\Roniere\ Resende\Documents\Meus\ Documentos\Estudo\ de\ Tecnologias\NXP\ Microcontrollers\Projects\Test_NPX\drivers/fsl_port.h:
 E:\Users\Roniere\ Resende\Documents\Meus\ Documentos\Estudo\ de\ Tecnologias\NXP\ Microcontrollers\Projects\Test_NPX\drivers/fsl_lptmr.h:
+E:\Users\Roniere\ Resende\Documents\Meus\ Documentos\Estudo\ de\ Tecnologias\NXP\ Microcontrollers\Projects\Test_NPX\drivers/fsl_adc16.h:
+E:\Users\Roniere\ Resende\Documents\Meus\ Documentos\Estudo\ de\ Tecnologias\NXP\ Microcontrollers\Projects\Test_NPX\drivers/fsl_clock.h:
+E:\Users\Roniere\ Resende\Documents\Meus\ Documentos\Estudo\ de\ Tecnologias\NXP\ Microcontrollers\Projects\Test_NPX\drivers/fsl_tpm.h:

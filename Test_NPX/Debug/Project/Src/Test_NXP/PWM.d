@@ -1,5 +1,5 @@
-Project/Src/Test_NXP/ADC.o Project/Src/Test_NXP/ADC.d: \
- ../Project/Src/Test_NXP/ADC.c \
+Project/Src/Test_NXP/PWM.o Project/Src/Test_NXP/PWM.d: \
+ ../Project/Src/Test_NXP/PWM.c \
  e:\users\roniere\ resende\documents\meus\ documentos\estudo\ de\ tecnologias\nxp\ microcontrollers\projects\test_npx\project\inc\test_nxp\test_nxp.h \
  E:\Users\Roniere\ Resende\Documents\Meus\ Documentos\Estudo\ de\ Tecnologias\NXP\ Microcontrollers\Projects\Test_NPX\board/board.h \
  E:\Users\Roniere\ Resende\Documents\Meus\ Documentos\Estudo\ de\ Tecnologias\NXP\ Microcontrollers\Projects\Test_NPX\board/clock_config.h \

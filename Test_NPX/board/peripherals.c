@@ -62,6 +62,7 @@ instance:
   - nvic:
     - interrupt_table:
       - 0: []
+      - 1: []
     - interrupts: []
  * BE CAREFUL MODIFYING THIS COMMENT - IT IS YAML SETTINGS FOR TOOLS **********/
 /* clang-format on */
@@ -85,19 +86,20 @@ instance:
 - peripheral: 'GPIOD'
 - config_sets:
   - fsl_gpio:
-    - enable_irq: 'false'
+    - enable_irq: 'true'
     - port_interrupt:
       - IRQn: 'PORTB_PORTC_PORTD_PORTE_IRQn'
       - enable_interrrupt: 'enabled'
       - enable_priority: 'false'
       - priority: '0'
       - enable_custom_name: 'false'
-    - quick_selection: 'QS_GPIO_1'
  * BE CAREFUL MODIFYING THIS COMMENT - IT IS YAML SETTINGS FOR TOOLS **********/
 /* clang-format on */
 
 static void GPIOD_init(void) {
   /* Make sure, the clock gate for port D is enabled (e. g. in pin_mux.c) */
+  /* Enable interrupt PORTB_PORTC_PORTD_PORTE_IRQn request in the NVIC. */
+  EnableIRQ(GPIOD_IRQN);
 }
 
 /***********************************************************************************************************************
@@ -157,6 +159,162 @@ static void LPTMR0_init(void) {
 }
 
 /***********************************************************************************************************************
+ * ADC initialization code
+ **********************************************************************************************************************/
+/* clang-format off */
+/* TEXT BELOW IS USED AS SETTING FOR TOOLS *************************************
+instance:
+- name: 'ADC'
+- type: 'adc16'
+- mode: 'ADC'
+- custom_name_enabled: 'true'
+- type_id: 'adc16_897558f9b7366ed198de18c33097d7d2'
+- functional_group: 'BOARD_InitPeripherals'
+- peripheral: 'ADC0'
+- config_sets:
+  - fsl_adc16:
+    - adc16_config:
+      - referenceVoltageSource: 'kADC16_ReferenceVoltageSourceVref'
+      - clockSource: 'kADC16_ClockSourceAsynchronousClock'
+      - enableAsynchronousClock: 'true'
+      - clockDivider: 'kADC16_ClockDivider8'
+      - resolution: 'kADC16_ResolutionSE12Bit'
+      - longSampleMode: 'kADC16_LongSampleDisabled'
+      - hardwareAverageMode: 'kADC16_HardwareAverageDisabled'
+      - enableHighSpeed: 'false'
+      - enableLowPower: 'false'
+      - enableContinuousConversion: 'false'
+    - adc16_channel_mux_mode: 'kADC16_ChannelMuxA'
+    - adc16_hardware_compare_config:
+      - hardwareCompareModeEnable: 'false'
+    - doAutoCalibration: 'false'
+    - offset: '0'
+    - trigger: 'false'
+    - enable_dma: 'false'
+    - enable_irq: 'false'
+    - adc_interrupt:
+      - IRQn: 'ADC0_IRQn'
+      - enable_interrrupt: 'enabled'
+      - enable_priority: 'false'
+      - priority: '0'
+      - enable_custom_name: 'false'
+    - adc16_channels_config:
+      - 0:
+        - channelName: 'ADC_TRIM'
+        - enableDifferentialConversion: 'false'
+        - channelNumber: 'SE.8'
+        - enableInterruptOnConversionCompleted: 'false'
+        - channelGroup: '0'
+        - initializeChannel: 'true'
+ * BE CAREFUL MODIFYING THIS COMMENT - IT IS YAML SETTINGS FOR TOOLS **********/
+/* clang-format on */
+adc16_channel_config_t ADC_channelsConfig[1] = {
+  {
+    .channelNumber = 8U,
+    .enableDifferentialConversion = false,
+    .enableInterruptOnConversionCompleted = false,
+  }
+};
+const adc16_config_t ADC_config = {
+  .referenceVoltageSource = kADC16_ReferenceVoltageSourceVref,
+  .clockSource = kADC16_ClockSourceAsynchronousClock,
+  .enableAsynchronousClock = true,
+  .clockDivider = kADC16_ClockDivider8,
+  .resolution = kADC16_ResolutionSE12Bit,
+  .longSampleMode = kADC16_LongSampleDisabled,
+  .hardwareAverageMode = kADC16_HardwareAverageDisabled,
+  .enableHighSpeed = false,
+  .enableLowPower = false,
+  .enableContinuousConversion = false
+};
+const adc16_channel_mux_mode_t ADC_muxMode = kADC16_ChannelMuxA;
+
+static void ADC_init(void) {
+  /* Initialize ADC16 converter */
+  ADC16_Init(ADC_PERIPHERAL, &ADC_config);
+  /* Make sure, that software trigger is used */
+  ADC16_EnableHardwareTrigger(ADC_PERIPHERAL, false);
+  /* Configure channel multiplexing mode */
+  ADC16_SetChannelMuxMode(ADC_PERIPHERAL, ADC_muxMode);
+  /* Initialize channel */
+  ADC16_SetChannelConfig(ADC_PERIPHERAL, ADC_CH0_CONTROL_GROUP, &ADC_channelsConfig[0]);
+}
+
+/***********************************************************************************************************************
+ * TPM1 initialization code
+ **********************************************************************************************************************/
+/* clang-format off */
+/* TEXT BELOW IS USED AS SETTING FOR TOOLS *************************************
+instance:
+- name: 'TPM1'
+- type: 'tpm'
+- mode: 'CenterAligned'
+- custom_name_enabled: 'false'
+- type_id: 'tpm_e7472ea12d53461b8d293488f3ed72ec'
+- functional_group: 'BOARD_InitPeripherals'
+- peripheral: 'TPM1'
+- config_sets:
+  - tpm_center_aligned_mode:
+    - tpm_center_aligned_channels_config:
+      - 0:
+        - channelId: 'PWM_LED'
+        - chnlNumber: 'kTPM_Chnl_1'
+        - level: 'kTPM_HighTrue'
+        - dutyCyclePercent: '50'
+        - enable_chan_irq: 'false'
+  - tpm_main_config:
+    - tpm_config:
+      - clockSource: 'kTPM_SystemClock'
+      - tpmSrcClkFreq: 'BOARD_BootClockRUN'
+      - prescale: 'kTPM_Prescale_Divide_1'
+      - timerFrequency: '4000'
+      - useGlobalTimeBase: 'false'
+      - triggerSelect: 'kTPM_Trigger_Select_0'
+      - triggerSource: 'kTPM_TriggerSource_Internal'
+      - enableDoze: 'false'
+      - enableDebugMode: 'false'
+      - enableReloadOnTrigger: 'false'
+      - enableStopOnOverflow: 'false'
+      - enableStartOnTrigger: 'false'
+      - enablePauseOnTrigger: 'false'
+    - timer_interrupts: ''
+    - enable_irq: 'false'
+    - tpm_interrupt:
+      - IRQn: 'TPM0_IRQn'
+      - enable_interrrupt: 'enabled'
+      - enable_priority: 'false'
+      - priority: '0'
+      - enable_custom_name: 'false'
+    - EnableTimerInInit: 'true'
+ * BE CAREFUL MODIFYING THIS COMMENT - IT IS YAML SETTINGS FOR TOOLS **********/
+/* clang-format on */
+const tpm_config_t TPM1_config = {
+  .prescale = kTPM_Prescale_Divide_1,
+  .useGlobalTimeBase = false,
+  .triggerSelect = kTPM_Trigger_Select_0,
+  .triggerSource = kTPM_TriggerSource_Internal,
+  .enableDoze = false,
+  .enableDebugMode = false,
+  .enableReloadOnTrigger = false,
+  .enableStopOnOverflow = false,
+  .enableStartOnTrigger = false,
+  .enablePauseOnTrigger = false
+};
+const tpm_chnl_pwm_signal_param_t TPM1_centerPwmSignalParams[] = { 
+  {
+    .chnlNumber = kTPM_Chnl_1,
+    .level = kTPM_HighTrue,
+    .dutyCyclePercent = 50U
+  }
+};
+
+static void TPM1_init(void) {
+  TPM_Init(TPM1_PERIPHERAL, &TPM1_config);
+  TPM_SetupPwm(TPM1_PERIPHERAL, TPM1_centerPwmSignalParams, sizeof(TPM1_centerPwmSignalParams) / sizeof(tpm_chnl_pwm_signal_param_t), kTPM_CenterAlignedPwm, 4000U, TPM1_CLOCK_SOURCE);
+  TPM_StartTimer(TPM1_PERIPHERAL, kTPM_SystemClock);
+}
+
+/***********************************************************************************************************************
  * Initialization functions
  **********************************************************************************************************************/
 void BOARD_InitPeripherals(void)
@@ -164,6 +322,8 @@ void BOARD_InitPeripherals(void)
   /* Initialize components */
   GPIOD_init();
   LPTMR0_init();
+  ADC_init();
+  TPM1_init();
 }
 
 /***********************************************************************************************************************

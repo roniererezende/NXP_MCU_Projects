@@ -1,0 +1,2 @@
+../Project/Src/Test_NXP/PWM.c:3:6:PWM_Init	8	static
+../Project/Src/Test_NXP/PWM.c:12:6:PWM_Signal_Releasing	8	static

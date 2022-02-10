@@ -7,16 +7,7 @@ void Test_NXP_Main(void)
 	switch(Test_NXP.State)
 	{
 		case E_Init:
-		    BOARD_InitBootPins();
-		    BOARD_InitBootClocks();
-		    BOARD_InitBootPeripherals();
-		#ifndef BOARD_INIT_DEBUG_CONSOLE_PERIPHERAL
-		    /* Init FSL debug console. */
-		    BOARD_InitDebugConsole();
-		#endif
-		    LPTMR_StartTimer(LPTMR0);
-			Test_NXP.State = E_Execution;
-			printf("Initialization Performed\n");
+			Test_NXP_Init();
 		break;
 
 		case E_Execution:
@@ -33,6 +24,8 @@ void Test_NXP_Main(void)
 				GPIO_PortToggle(BOARD_WHITE_LED_GPIO, 1 << BOARD_WHITE_LED_PIN);
 				GPIO_PortToggle(BOARD_RED_LED_GPIO, BOARD_RED_LED_PIN_MASK);
 				Test_NXP.Timer_Interrupt_Flag = false;
+
+				PWM_Signal_Releasing();
 			}
 
 			if(GPIO_PinRead(BOARD_KEY_GPIO, BOARD_KEY_PIN) != false)
@@ -44,6 +37,27 @@ void Test_NXP_Main(void)
 				GPIO_PinWrite(BOARD_GREEN_LED_GPIO, BOARD_GREEN_LED_PIN, true);
 			}
 			printf("Performing Execution\n");
+
+			ADC_Conversion();
+
 		break;
 	}
+}
+
+void Test_NXP_Init(void)
+{
+	ADC_Init();
+	PWM_Init();
+
+	BOARD_InitBootPins();
+	BOARD_InitBootClocks();
+	BOARD_InitBootPeripherals();
+#ifndef BOARD_INIT_DEBUG_CONSOLE_PERIPHERAL
+	/* Init FSL debug console. */
+	BOARD_InitDebugConsole();
+#endif
+	LPTMR_StartTimer(LPTMR0);
+	printf("Initialization Performed\n");
+
+	Test_NXP.State = E_Execution;
 }

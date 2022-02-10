@@ -13,6 +13,9 @@
 #include "fsl_gpio.h"
 #include "fsl_port.h"
 #include "fsl_lptmr.h"
+#include "fsl_adc16.h"
+#include "fsl_clock.h"
+#include "fsl_tpm.h"
 
 #if defined(__cplusplus)
 extern "C" {
@@ -24,6 +27,12 @@ extern "C" {
 /* Definitions for BOARD_InitPeripherals functional group */
 /* Alias for GPIOD peripheral */
 #define GPIOD_GPIO GPIOD
+/* Alias for PORTD */
+#define GPIOD_PORT PORTD
+/* GPIOD interrupt vector ID (number). */
+#define GPIOD_IRQN PORTB_PORTC_PORTD_PORTE_IRQn
+/* GPIOD interrupt handler identifier. */
+#define GPIOD_IRQHANDLER PORTB_PORTC_PORTD_PORTE_IRQHandler
 /* BOARD_InitPeripherals defines for LPTMR0 */
 /* Definition of peripheral ID */
 #define LPTMR0_PERIPHERAL LPTMR0
@@ -39,11 +48,35 @@ extern "C" {
 #define LPTMR0_IRQN LPTMR0_IRQn
 /* LPTMR0 interrupt handler identifier. */
 #define Timer_Interrupt LPTMR0_IRQHandler
+/* Alias for ADC0 peripheral */
+#define ADC_PERIPHERAL ADC0
+/* Definition of custom name for ADC0 configuration #0 (channel 8, control group 0) */
+#define ADC_ADC_TRIM 0U
+/* ADC interrupt vector ID (number). */
+#define ADC_IRQN ADC0_IRQn
+/* ADC interrupt handler identifier. */
+#define ADC_IRQHANDLER ADC0_IRQHandler
+/* Channel 0 (SE.8) conversion control group. */
+#define ADC_CH0_CONTROL_GROUP 0
+/* Definition of peripheral ID */
+#define TPM1_PERIPHERAL TPM1
+/* Definition of the clock source frequency */
+#define TPM1_CLOCK_SOURCE 48000000UL
+/* TPM1 interrupt vector ID (number). */
+#define TPM1_IRQN TPM0_IRQn
+/* TPM1 interrupt handler identifier. */
+#define TPM1_IRQHANDLER 
+/* Definition of TPM1 channel number 1 */
+#define TPM1_PWM_LED_CHANNEL kTPM_Chnl_1
 
 /***********************************************************************************************************************
  * Global variables
  **********************************************************************************************************************/
 extern const lptmr_config_t LPTMR0_config;
+extern adc16_channel_config_t ADC_channelsConfig[1];
+extern const adc16_config_t ADC_config;
+extern const adc16_channel_mux_mode_t ADC_muxMode;
+extern const tpm_config_t TPM1_config;
 
 /***********************************************************************************************************************
  * Initialization functions

@@ -17,6 +17,9 @@ Project/Src/main.o Project/Src/main.d: ../Project/Src/main.c \
  E:\Users\Roniere\ Resende\Documents\Meus\ Documentos\Estudo\ de\ Tecnologias\NXP\ Microcontrollers\Projects\Test_NPX\board/peripherals.h \
  E:\Users\Roniere\ Resende\Documents\Meus\ Documentos\Estudo\ de\ Tecnologias\NXP\ Microcontrollers\Projects\Test_NPX\drivers/fsl_port.h \
  E:\Users\Roniere\ Resende\Documents\Meus\ Documentos\Estudo\ de\ Tecnologias\NXP\ Microcontrollers\Projects\Test_NPX\drivers/fsl_lptmr.h \
+ E:\Users\Roniere\ Resende\Documents\Meus\ Documentos\Estudo\ de\ Tecnologias\NXP\ Microcontrollers\Projects\Test_NPX\drivers/fsl_adc16.h \
+ E:\Users\Roniere\ Resende\Documents\Meus\ Documentos\Estudo\ de\ Tecnologias\NXP\ Microcontrollers\Projects\Test_NPX\drivers/fsl_clock.h \
+ E:\Users\Roniere\ Resende\Documents\Meus\ Documentos\Estudo\ de\ Tecnologias\NXP\ Microcontrollers\Projects\Test_NPX\drivers/fsl_tpm.h \
  E:\Users\Roniere\ Resende\Documents\Meus\ Documentos\Estudo\ de\ Tecnologias\NXP\ Microcontrollers\Projects\Test_NPX\board/pin_mux.h \
  E:\Users\Roniere\ Resende\Documents\Meus\ Documentos\Estudo\ de\ Tecnologias\NXP\ Microcontrollers\Projects\Test_NPX\board/clock_config.h \
  E:\Users\Roniere\ Resende\Documents\Meus\ Documentos\Estudo\ de\ Tecnologias\NXP\ Microcontrollers\Projects\Test_NPX\device/MKL27Z644.h \
@@ -32,7 +35,8 @@ Project/Src/main.o Project/Src/main.d: ../Project/Src/main.c \
  E:\Users\Roniere\ Resende\Documents\Meus\ Documentos\Estudo\ de\ Tecnologias\NXP\ Microcontrollers\Projects\Test_NPX\freertos\freertos_kernel\portable\GCC\ARM_CM0/portmacro.h \
  E:\Users\Roniere\ Resende\Documents\Meus\ Documentos\Estudo\ de\ Tecnologias\NXP\ Microcontrollers\Projects\Test_NPX\freertos\freertos_kernel\include/mpu_wrappers.h \
  e:\users\roniere\ resende\documents\meus\ documentos\estudo\ de\ tecnologias\nxp\ microcontrollers\projects\test_npx\project\inc\test_nxp\Interrupt.h \
- e:\users\roniere\ resende\documents\meus\ documentos\estudo\ de\ tecnologias\nxp\ microcontrollers\projects\test_npx\project\inc\test_nxp\ADC.h
+ e:\users\roniere\ resende\documents\meus\ documentos\estudo\ de\ tecnologias\nxp\ microcontrollers\projects\test_npx\project\inc\test_nxp\ADC.h \
+ e:\users\roniere\ resende\documents\meus\ documentos\estudo\ de\ tecnologias\nxp\ microcontrollers\projects\test_npx\project\inc\test_nxp\PWM.h
 e:\users\roniere\ resende\documents\meus\ documentos\estudo\ de\ tecnologias\nxp\ microcontrollers\projects\test_npx\project\inc\test_nxp\test_nxp.h:
 E:\Users\Roniere\ Resende\Documents\Meus\ Documentos\Estudo\ de\ Tecnologias\NXP\ Microcontrollers\Projects\Test_NPX\board/board.h:
 E:\Users\Roniere\ Resende\Documents\Meus\ Documentos\Estudo\ de\ Tecnologias\NXP\ Microcontrollers\Projects\Test_NPX\board/clock_config.h:
@@ -51,6 +55,9 @@ E:\Users\Roniere\ Resende\Documents\Meus\ Documentos\Estudo\ de\ Tecnologias\NXP
 E:\Users\Roniere\ Resende\Documents\Meus\ Documentos\Estudo\ de\ Tecnologias\NXP\ Microcontrollers\Projects\Test_NPX\board/peripherals.h:
 E:\Users\Roniere\ Resende\Documents\Meus\ Documentos\Estudo\ de\ Tecnologias\NXP\ Microcontrollers\Projects\Test_NPX\drivers/fsl_port.h:
 E:\Users\Roniere\ Resende\Documents\Meus\ Documentos\Estudo\ de\ Tecnologias\NXP\ Microcontrollers\Projects\Test_NPX\drivers/fsl_lptmr.h:
+E:\Users\Roniere\ Resende\Documents\Meus\ Documentos\Estudo\ de\ Tecnologias\NXP\ Microcontrollers\Projects\Test_NPX\drivers/fsl_adc16.h:
+E:\Users\Roniere\ Resende\Documents\Meus\ Documentos\Estudo\ de\ Tecnologias\NXP\ Microcontrollers\Projects\Test_NPX\drivers/fsl_clock.h:
+E:\Users\Roniere\ Resende\Documents\Meus\ Documentos\Estudo\ de\ Tecnologias\NXP\ Microcontrollers\Projects\Test_NPX\drivers/fsl_tpm.h:
 E:\Users\Roniere\ Resende\Documents\Meus\ Documentos\Estudo\ de\ Tecnologias\NXP\ Microcontrollers\Projects\Test_NPX\board/pin_mux.h:
 E:\Users\Roniere\ Resende\Documents\Meus\ Documentos\Estudo\ de\ Tecnologias\NXP\ Microcontrollers\Projects\Test_NPX\board/clock_config.h:
 E:\Users\Roniere\ Resende\Documents\Meus\ Documentos\Estudo\ de\ Tecnologias\NXP\ Microcontrollers\Projects\Test_NPX\device/MKL27Z644.h:
@@ -67,3 +74,4 @@ E:\Users\Roniere\ Resende\Documents\Meus\ Documentos\Estudo\ de\ Tecnologias\NXP
 E:\Users\Roniere\ Resende\Documents\Meus\ Documentos\Estudo\ de\ Tecnologias\NXP\ Microcontrollers\Projects\Test_NPX\freertos\freertos_kernel\include/mpu_wrappers.h:
 e:\users\roniere\ resende\documents\meus\ documentos\estudo\ de\ tecnologias\nxp\ microcontrollers\projects\test_npx\project\inc\test_nxp\Interrupt.h:
 e:\users\roniere\ resende\documents\meus\ documentos\estudo\ de\ tecnologias\nxp\ microcontrollers\projects\test_npx\project\inc\test_nxp\ADC.h:
+e:\users\roniere\ resende\documents\meus\ documentos\estudo\ de\ tecnologias\nxp\ microcontrollers\projects\test_npx\project\inc\test_nxp\PWM.h:

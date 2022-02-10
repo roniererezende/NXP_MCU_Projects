@@ -6,16 +6,19 @@
 C_SRCS += \
 ../Project/Src/Test_NXP/ADC.c \
 ../Project/Src/Test_NXP/Interrupt.c \
+../Project/Src/Test_NXP/PWM.c \
 ../Project/Src/Test_NXP/Test_NPX.c 
 
 OBJS += \
 ./Project/Src/Test_NXP/ADC.o \
 ./Project/Src/Test_NXP/Interrupt.o \
+./Project/Src/Test_NXP/PWM.o \
 ./Project/Src/Test_NXP/Test_NPX.o 
 
 C_DEPS += \
 ./Project/Src/Test_NXP/ADC.d \
 ./Project/Src/Test_NXP/Interrupt.d \
+./Project/Src/Test_NXP/PWM.d \
 ./Project/Src/Test_NXP/Test_NPX.d 
 
 

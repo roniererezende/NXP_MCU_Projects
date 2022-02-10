@@ -36,7 +36,7 @@ pin_labels:
 - {pin_num: '43', pin_signal: ADC0_SE14/PTC0/EXTRG_IN/USB_SOF_OUT/CMP0_OUT, label: 'J4[4]/A1-ADC0_SE14', identifier: USB_SOF_OUT}
 - {pin_num: '9', pin_signal: ADC0_DP0/ADC0_SE0/PTE20/TPM1_CH0/LPUART0_TX/FXIO0_D4, label: 'J4[6]/A2-ADC0_SE0', identifier: ADC0_SE0}
 - {pin_num: '10', pin_signal: ADC0_DM0/ADC0_SE4a/PTE21/TPM1_CH1/LPUART0_RX/FXIO0_D5, label: 'J4[8]/A3-ADC0_SE4A'}
-- {pin_num: '36', pin_signal: ADC0_SE9/PTB1/I2C0_SDA/TPM1_CH1/SPI1_MISO/SPI1_MOSI, label: 'J4[10]/A4-I2C0_SDA/ADC0_SE9', identifier: I2C0_SDA}
+- {pin_num: '36', pin_signal: ADC0_SE9/PTB1/I2C0_SDA/TPM1_CH1/SPI1_MISO/SPI1_MOSI, label: PWM_LED, identifier: I2C0_SDA;PWM_LED}
 - {pin_num: '35', pin_signal: ADC0_SE8/PTB0/LLWU_P5/I2C0_SCL/TPM1_CH0/SPI1_MOSI/SPI1_MISO, label: ADC_TRIM, identifier: I2C0_SCL;ADC_TRIM}
 - {pin_num: '41', pin_signal: PTB18/TPM2_CH0, label: 'J2[11]/D11[1]/LED_RED', identifier: LED_RED}
 - {pin_num: '25', pin_signal: PTA3/I2C1_SCL/TPM0_CH0/SWD_DIO, label: 'J11[2]/SWD_DIO'}
@@ -112,6 +112,7 @@ BOARD_InitPins:
     gpio_init_state: 'true'}
   - {pin_num: '61', peripheral: GPIOD, signal: 'GPIO, 4', pin_signal: PTD4/LLWU_P14/SPI1_PCS0/UART2_RX/TPM0_CH4/FXIO0_D4, identifier: GREEN_LED, direction: OUTPUT}
   - {pin_num: '35', peripheral: ADC0, signal: 'SE, 8', pin_signal: ADC0_SE8/PTB0/LLWU_P5/I2C0_SCL/TPM1_CH0/SPI1_MOSI/SPI1_MISO, identifier: ADC_TRIM}
+  - {pin_num: '36', peripheral: TPM1, signal: 'CH, 1', pin_signal: ADC0_SE9/PTB1/I2C0_SDA/TPM1_CH1/SPI1_MISO/SPI1_MOSI, identifier: PWM_LED}
  * BE CAREFUL MODIFYING THIS COMMENT - IT IS YAML SETTINGS FOR TOOLS ***********
  */
 /* clang-format on */
@@ -166,6 +167,9 @@ void BOARD_InitPins(void)
 
     /* PORTB0 (pin 35) is configured as ADC0_SE8 */
     PORT_SetPinMux(BOARD_ADC_TRIM_PORT, BOARD_ADC_TRIM_PIN, kPORT_PinDisabledOrAnalog);
+
+    /* PORTB1 (pin 36) is configured as TPM1_CH1 */
+    PORT_SetPinMux(BOARD_PWM_LED_PORT, BOARD_PWM_LED_PIN, kPORT_MuxAlt3);
 
     /* PORTD0 (pin 57) is configured as PTD0 */
     PORT_SetPinMux(BOARD_BLUE_LED_PORT, BOARD_BLUE_LED_PIN, kPORT_MuxAsGpio);

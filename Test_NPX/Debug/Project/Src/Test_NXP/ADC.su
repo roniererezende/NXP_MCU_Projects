@@ -1,0 +1,3 @@
+E:\Users\Roniere Resende\Documents\Meus Documentos\Estudo de Tecnologias\NXP Microcontrollers\Projects\Test_NPX\drivers/fsl_adc16.h:491:24:ADC16_GetChannelConversionValue	16	static
+../Project/Src/Test_NXP/ADC.c:4:6:ADC_Init	8	static
+../Project/Src/Test_NXP/ADC.c:9:6:ADC_Conversion	8	static
